@@ -4,6 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
+import { registerLocaleData } from '@angular/common';
+
+import localePl from '@angular/common/locales/pl';
+registerLocaleData(localePl);
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule ],
