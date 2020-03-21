@@ -10,8 +10,6 @@ import {Task} from './task';
 export class AppComponent  {
     config: { [key:string]: string | Date } = null;
 
-    taskName: string;
-
     tasks: Task[] = [{
       name: 'Siłownia',
       deadline: '2020-01-02',
@@ -42,14 +40,11 @@ export class AppComponent  {
   clearTasks(){
     this.tasks = [];
   }
-  onKeyUp(event: KeyboardEvent){
-    const target = event.target as HTMLInputElement;
-    this.taskName = target.value;
-  }
-  createTask(){
+
+  createTask(name: string, date: string){
     const task: Task = {
-      name: this.taskName,
-      deadline: '2020-04-01',
+      name: name,
+      deadline: date,
       done: false
     };
     this.tasks.push(task);
