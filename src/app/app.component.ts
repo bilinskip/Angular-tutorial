@@ -8,6 +8,7 @@ import {Task} from './task';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
+    editMode = false;
     config: { [key:string]: string | Date } = null;
     taskName = 'Sugerowane zadanie codzienne: odkurzanie';
     taskDate = '';
@@ -15,7 +16,7 @@ export class AppComponent  {
     tasks: Task[] = [{
       name: 'Siłownia',
       deadline: '2020-01-02',
-      done: false
+      done: true
     },
     {
       name: 'Nauka',
@@ -37,6 +38,7 @@ export class AppComponent  {
         date : new Date()
         };
       },  500);
+      this.sortTasks();
       
     }
   clearTasks(){
@@ -52,5 +54,22 @@ export class AppComponent  {
     this.tasks.push(task);
     this.taskName = '';
     this.taskDate = '';
+    this.sortTasks();
+  }
+  switchEditMode(){
+    this.editMode = !this.editMode;
+  }
+  markTaskAsDone(task: Task){
+    task.done = true;
+    this.sortTasks();
+  }
+  deleteTask(task: Task){
+    this.tasks = this.tasks.filter(e => e !== task);
+    this.sortTasks();
+  }
+  private sortTasks(){
+    this.tasks = this.tasks.sort((a: Task, b: Task) => 
+    a.done === b.done ? 0 : a.done ? 1 : -1
+    );
   }
 }
